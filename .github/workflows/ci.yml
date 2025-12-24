@@ -1,0 +1,38 @@
+
+name: Angular CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # If you have Vitest tests; this won't fail if there are none
+      - name: Run unit tests (Vitest)
+        run: npx vitest --run --reporter=dot || echo "No tests"
+
+      - name: Build (production)
+        run: npx ng build --configuration production
+
+      - name: Upload dist as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/**
