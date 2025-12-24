@@ -1,0 +1,19 @@
+
+<mat-card class="entry-card">
+  <mat-card-title>Add a new task</mat-card-title>
+  <mat-card-content>
+    <form (submit)="submit(); $event.preventDefault()" class="add-form">
+      <mat-form-field appearance="outline" class="full">
+        <mat-label>Task title</mat-label>
+        <input matInput [(ngModel)]="title" name="title" placeholder="e.g., Write unit tests" />
+        <button mat-icon-button matSuffix aria-label="clear title" *ngIf="title" (click)="title=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">
+        <mat-icon>add</mat-icon>
+        Add
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

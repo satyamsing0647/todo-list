@@ -1,0 +1,33 @@
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.title {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.gh {
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.container {
+  max-width: var(--container-max-w);
+  margin: 24px auto;
+  padding: 0 var(--space-2);
+}
+
+.mat-mdc-tab-group {
+  background: #fff;
+  margin-top: var(--space-2);
+}

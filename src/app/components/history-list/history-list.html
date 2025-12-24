@@ -1,0 +1,43 @@
+
+<mat-card class="list-card">
+  <mat-card-subtitle>Completed tasks</mat-card-subtitle>
+
+  <div class="actions-row">
+    <button mat-stroked-button color="warn" (click)="clearAll.emit()" [disabled]="items.length === 0">
+      <mat-icon>clear_all</mat-icon>
+      Clear all completed
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <ng-container *ngIf="items.length; else emptyCompleted">
+    <mat-list>
+      <mat-list-item *ngFor="let t of items; trackBy: trackById" class="list-item">
+        <!-- Badge icon + title on the left -->
+        <div matListItemTitle class="item-text">
+          <mat-icon class="done-icon" color="primary">task_alt</mat-icon>
+          {{ t.title }}
+          <span class="meta">Completed {{ t.completedAt | date:'medium' }}</span>
+        </div>
+
+        <!-- Undo + Delete on the right -->
+        <div matListItemMeta class="actions">
+          <button mat-icon-button (click)="undo.emit(t)" aria-label="Undo">
+            <mat-icon>undo</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="remove.emit(t)" aria-label="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </ng-container>
+
+  <ng-template #emptyCompleted>
+<div class="empty">
+  <mat-icon class="empty-icon">hourglass_empty</mat-icon>
+  <p>No completed tasks yet.</p>
+</div>
+  </ng-template>
+</mat-card>

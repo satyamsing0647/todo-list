@@ -1,0 +1,35 @@
+
+<mat-card class="list-card">
+  <mat-card-subtitle>Tasks to do</mat-card-subtitle>
+  <mat-divider></mat-divider>
+
+  <ng-container *ngIf="items.length; else emptyActive">
+    <mat-list>
+      <mat-list-item *ngFor="let t of items; trackBy: trackById" class="list-item">
+        <!-- Title on the left -->
+        <div matListItemTitle class="item-text" [matTooltip]="'Created ' + (t.createdAt | date:'medium')">
+          {{ t.title }}
+        </div>
+
+        <!-- Actions on the right (meta area) -->
+        <div matListItemMeta class="actions">
+          <!-- Complete -->
+          <button mat-icon-button color="primary" (click)="done.emit(t)" aria-label="Mark complete">
+            <mat-icon>check_circle</mat-icon>
+          </button>
+          <!-- Delete -->
+          <button mat-icon-button color="warn" (click)="remove.emit(t)" aria-label="Delete task">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </ng-container>
+
+  <ng-template #emptyActive>
+<div class="empty">
+  <mat-icon class="empty-icon">check_circle</mat-icon>
+  <p>No active tasks. Nice!</p>
+</div>
+  </ng-template>
+</mat-card>
